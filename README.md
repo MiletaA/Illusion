@@ -1,6 +1,6 @@
 # SMAI -  New Way Of Thinking
 
-![smai logo](https://github.com/MiletaA/smai/assets/92308650/07c00fef-4d72-4c49-9506-4763c0b244cc)
+![smai logo](https://github.com/MiletaA/smai/assets/92308650/d9cefcd2-c7a9-40eb-925d-acc8e9772392)
 
 ## Introduction
 👋 Welcome to "smai," an ambitious project aimed at transforming social media through the power of Artificial Intelligence. The goal is to create a platform where content is generated and personalized exclusively by AI, moving from images to eventually videos.
