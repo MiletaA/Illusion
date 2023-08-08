@@ -83,12 +83,12 @@ class _ImageSearchState extends State<ImageSearch> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Tip: Click the reload button after agreeing to these terms and conditions to refresh the content. Use that button frequently if image takes too long to load.',
+                  'Tip: Click the reload button after agreeing to these terms and conditions to refresh the content. Use that button frequently if image takes too long to load or search some term then click x and everything should work fine. ',
                   style: TextStyle(color: Colors.blue, fontStyle: FontStyle.italic),
                 ),
               ],
             ),
-          ),
+          ), 
           actions: [
             TextButton(
               onPressed: () {

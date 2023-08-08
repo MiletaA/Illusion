@@ -1,11 +1,11 @@
 {
-    "name": "untitled1",
-    "short_name": "untitled1",
+    "name": "smai",
+    "short_name": "smai",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "SMAI - New way of thinking about social media",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
