@@ -1,4 +1,4 @@
-# smai: AI-Powered Social Media Platform - new way of thinking
+# SMAI -  New Way Of Thinking
 
 ![smai logo](https://github.com/MiletaA/smai/assets/92308650/07c00fef-4d72-4c49-9506-4763c0b244cc)
 
