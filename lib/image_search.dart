@@ -4,7 +4,14 @@ import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+// ignore: avoid_web_libraries_in_flutter
+import 'dart:html' as html;
 
+
+import 'package:permission_handler/permission_handler.dart';
 import 'custom_widget.dart';
 import 'liked_images.dart';
 import 'message.dart';
@@ -32,6 +39,8 @@ class _ImageSearchState extends State<ImageSearch> {
   final searchController = TextEditingController();
   final rand = Random();
   final FocusNode focusNode = FocusNode();
+  int currentBatchIndex = 0;
+  static const int batchSize = 10;
 
   bool _isSearch = false;
   bool searchPerformed = false;
@@ -93,6 +102,7 @@ class _ImageSearchState extends State<ImageSearch> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
+                loadRandomImage();
               },
               style: TextButton.styleFrom(
                 side: const BorderSide(color: Color(0xFF2D4356)),
@@ -119,6 +129,13 @@ class _ImageSearchState extends State<ImageSearch> {
     focusNode.requestFocus();
     setState(() {});
   }
+  void loadNextBatch() {
+    int start = currentBatchIndex * batchSize;
+    int end = min(start + batchSize, messages.length);
+    visibleMessages.addAll(messages.sublist(start, end));
+    currentBatchIndex++;
+    setState(() {});
+  }
 
   void resetSearch() {
     if (!searchPerformed) {
@@ -130,11 +147,13 @@ class _ImageSearchState extends State<ImageSearch> {
       searchController.clear();
       _isSearch = false;
       searchPerformed = false;
-      visibleMessages = List.from(messages)
-        ..shuffle();
+      visibleMessages = [];
+      currentBatchIndex = 0; // Reset the batch index
+      loadNextBatch(); // Load the first batch of images
       setState(() {});
     }
   }
+
   void likeCurrentImage() async {
     if (visibleMessages.isNotEmpty) {
       var currentMessage = visibleMessages[0];
@@ -149,6 +168,9 @@ class _ImageSearchState extends State<ImageSearch> {
 
 
   void loadRandomImage() {
+    if (visibleMessages.length <= batchSize && currentBatchIndex * batchSize < messages.length) {
+      loadNextBatch(); // Load the next batch if needed
+    }
     if (visibleMessages.isNotEmpty) {
       var randomIndex = rand.nextInt(visibleMessages.length);
       var randomMessage = visibleMessages[randomIndex];
@@ -157,6 +179,7 @@ class _ImageSearchState extends State<ImageSearch> {
     }
     setState(() {});
   }
+
 
   Future<void> loadJsonData() async {
     final fileNameString =
@@ -186,6 +209,52 @@ class _ImageSearchState extends State<ImageSearch> {
           messages); // Call the function when messages are loaded
     }
   }
+Future<void> downloadImage(String url) async {
+  if (kIsWeb) {
+    // Web platform code
+    var filename = url.substring(url.lastIndexOf("/") + 1);
+    html.AnchorElement(href: url)
+      ..setAttribute('download', filename)
+      ..click();
+  } else {
+    // Mobile platform code
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+      status = await Permission.storage.status;
+    }
+
+    if (status.isGranted) {
+      final response = await http.get(Uri.parse(url));
+
+      if (response.statusCode == 200) {
+        final documentDirectory = await getApplicationDocumentsDirectory();
+        final file = File('${documentDirectory.path}/image_${DateTime.now().millisecondsSinceEpoch}.png');
+
+        file.writeAsBytesSync(response.bodyBytes);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Image downloaded successfully!'),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to download image.'),
+          ),
+        );
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Storage permission is denied. Cannot download image.'),
+        ),
+      );
+    }
+  }
+}
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -333,7 +402,30 @@ class _ImageSearchState extends State<ImageSearch> {
                   },
                 ),
               ),
-              // const SizedBox(width: 20),
+              const SizedBox(width: 20),
+              Container(
+                width: 50.0,
+                height: 50.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(
+                    color: Colors.white,
+                    width: 2,
+                  ),
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: IconButton(
+                  icon: const Icon(Icons.download, color: Color(0xFF2D4356)), // Download icon
+                  onPressed: () {
+                    if (visibleMessages.isNotEmpty && visibleMessages[0].attachments.isNotEmpty) {
+                      downloadImage(visibleMessages[0].attachments[0].url); // Call the download function with the current image URL
+                    }
+                  },
+                ),
+              ),
+
+              
+              
               // Container(
               //   width: 50.0,
               //   height: 50.0,
