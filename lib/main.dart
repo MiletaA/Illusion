@@ -2,19 +2,20 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_service.dart';
+import 'config.dart';
 import 'image_search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: FirebaseOptions(
-      apiKey: firebaseConfig['apiKey'],
-      authDomain: firebaseConfig['authDomain'],
-      projectId: firebaseConfig['projectId'],
-      storageBucket: firebaseConfig['storageBucket'],
-      messagingSenderId: firebaseConfig['messagingSenderId'],
-      appId: firebaseConfig['appId'],
-      measurementId: firebaseConfig['measurementId'],
+      apiKey: firebaseConfig['apiKey']!,
+      authDomain: firebaseConfig['authDomain']!,
+      projectId: firebaseConfig['projectId']!,
+      storageBucket: firebaseConfig['storageBucket']!,
+      messagingSenderId: firebaseConfig['messagingSenderId']!,
+      appId: firebaseConfig['appId']!,
+      measurementId: firebaseConfig['measurementId']!,
     ),
   );
   runApp(const MyApp());
