@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'auth_service.dart';
+import 'image_search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,6 +61,13 @@ class _MyAppState extends State<MyApp> {
                     _emailController.text, _passwordController.text, context);
               },
               child: const Text('Register'),
+            ),
+            // Adding the "Try it" button
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const ImageSearch()));
+              },
+              child: const Text('Try it'),
             ),
           ],
         ),
