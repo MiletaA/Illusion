@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'custom_widget.dart';
 import 'liked_images.dart';
 import 'message.dart';
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class ImageSearch extends StatefulWidget {
   const ImageSearch({Key? key, this.onMessagesLoaded}) : super(key: key);
@@ -27,6 +29,42 @@ class ImageSearch extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _ImageSearchState createState() => _ImageSearchState();
 }
+Future<User?> signIn(String email, String password, BuildContext context) async {
+  try {
+      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ImageSearch()),
+        );
+      }
+      return userCredential.user;
+  } catch (e) {
+      print(e);
+      return null;
+  }
+}
+Future<User?> signUp(String email, String password, BuildContext context) async {
+  try {
+      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      if (userCredential.user != null) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ImageSearch()),
+        );
+      }
+      return userCredential.user;
+  } catch (e) {
+      print(e);
+      return null;
+  }
+}
 
 class _ImageSearchState extends State<ImageSearch> {
   List<Message> messages = [];
@@ -38,7 +76,7 @@ class _ImageSearchState extends State<ImageSearch> {
   final rand = Random();
   final FocusNode focusNode = FocusNode();
   int currentBatchIndex = 0;
-  static const int batchSize = 10;
+  static const int batchSize = 100;
 
   bool _isSearch = false;
   bool searchPerformed = false;
