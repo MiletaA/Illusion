@@ -7,14 +7,16 @@ import 'image_search.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-      options: const FirebaseOptions(
-          apiKey: "AIzaSyCxOxdYvpNAQq7S5p3PPCRxDm37t1-X3PI",
-          authDomain: "smai-407ba.firebaseapp.com",
-          projectId: "smai-407ba",
-          storageBucket: "smai-407ba.appspot.com",
-          messagingSenderId: "772935278270",
-          appId: "1:772935278270:web:aa0a425175d32f8a9b48ef",
-          measurementId: "G-T9M7GQ1S4Q",),);
+    options: FirebaseOptions(
+      apiKey: firebaseConfig['apiKey'],
+      authDomain: firebaseConfig['authDomain'],
+      projectId: firebaseConfig['projectId'],
+      storageBucket: firebaseConfig['storageBucket'],
+      messagingSenderId: firebaseConfig['messagingSenderId'],
+      appId: firebaseConfig['appId'],
+      measurementId: firebaseConfig['measurementId'],
+    ),
+  );
   runApp(const MyApp());
 }
 
