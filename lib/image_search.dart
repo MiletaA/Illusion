@@ -203,12 +203,8 @@ class _ImageSearchState extends State<ImageSearch> {
       loadRandomImage();
     }
   }
-
-  void loadRandomImage() {
-    if (visibleMessages.length <= batchSize &&
-        currentBatchIndex * batchSize < messages.length) {
-      loadNextBatch(); // Load the next batch if needed
-    }
+  
+void loadRandomImage() {
     if (visibleMessages.isNotEmpty) {
       var randomIndex = rand.nextInt(visibleMessages.length);
       var randomMessage = visibleMessages[randomIndex];
