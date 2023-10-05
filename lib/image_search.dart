@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -29,42 +31,7 @@ class ImageSearch extends StatefulWidget {
   // ignore: library_private_types_in_public_api
   _ImageSearchState createState() => _ImageSearchState();
 }
-Future<User?> signIn(String email, String password, BuildContext context) async {
-  try {
-      UserCredential userCredential = await _auth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (userCredential.user != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ImageSearch()),
-        );
-      }
-      return userCredential.user;
-  } catch (e) {
-      print(e);
-      return null;
-  }
-}
-Future<User?> signUp(String email, String password, BuildContext context) async {
-  try {
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      if (userCredential.user != null) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const ImageSearch()),
-        );
-      }
-      return userCredential.user;
-  } catch (e) {
-      print(e);
-      return null;
-  }
-}
+
 
 class _ImageSearchState extends State<ImageSearch> {
   List<Message> messages = [];
@@ -109,9 +76,9 @@ class _ImageSearchState extends State<ImageSearch> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Terms and Conditions'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
-              children: const [
+              children: [
                 Text(
                   'WARNING: The content displayed may be disturbing or scary, politically incorrect, and may not be suitable for all audiences. Viewer discretion is advised.',
                   style: TextStyle(color: Colors.red),
@@ -292,7 +259,9 @@ void loadRandomImage() {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 80, 72, 72),
+    body: Column(
       children: [
         // Message at top
         if (visibleMessages.isNotEmpty)
@@ -468,6 +437,7 @@ void loadRandomImage() {
           ),
         ),
       ],
+    )
     );
   }
 }
