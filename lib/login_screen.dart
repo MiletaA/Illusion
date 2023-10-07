@@ -37,10 +37,12 @@ class _LoginScreenState extends State<LoginScreen> {
   late String email;
   late String password;
   bool showSpinner = false;
+  Color bg = const Color(0xFF08576a);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: bg,
       body: ModalProgressHUD(
         inAsyncCall: showSpinner,
         child: Padding(
@@ -74,7 +76,18 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 24.0,
               ),
-              ElevatedButton(
+              OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                    fixedSize: const Size(200, 50),
+                    shadowColor: Colors.black,
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18),
+                    foregroundColor: Colors.white,
+                    side: const BorderSide(width: 2.0, color: Colors.white),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32.0),
+                    ),
+                  ),
                   child: const Text('Log In'),
                   onPressed: () async {
                     setState(() {
