@@ -15,11 +15,11 @@ const kTextFieldDecoration = InputDecoration(
       borderRadius: BorderRadius.all(Radius.circular(32.0)),
     ),
     enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.lightBlueAccent, width: 1.0),
+      borderSide: BorderSide(color: Colors.white, width: 1.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0)),
     ),
     focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.lightBlueAccent, width: 2.0),
+      borderSide: BorderSide(color: Colors.white, width: 2.0),
       borderRadius: BorderRadius.all(Radius.circular(32.0)),
     ));
 
@@ -52,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               TextField(
+                  style: const TextStyle(color: Colors.white),
                   keyboardType: TextInputType.emailAddress,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
@@ -65,6 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 8.0,
               ),
               TextField(
+                  style: const  TextStyle(color: Colors.white),
                   obscureText: true,
                   textAlign: TextAlign.center,
                   onChanged: (value) {
@@ -79,7 +81,6 @@ class _LoginScreenState extends State<LoginScreen> {
               OutlinedButton(
                   style: OutlinedButton.styleFrom(
                     fixedSize: const Size(200, 50),
-                    shadowColor: Colors.black,
                     textStyle: const TextStyle(
                         fontWeight: FontWeight.bold, fontSize: 18),
                     foregroundColor: Colors.white,
@@ -101,6 +102,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     } catch (e) {
                       print(e);
+                      Text('$e',
+                     textAlign: TextAlign.center,
+                     style: const TextStyle(fontWeight: FontWeight.w100),
+                     );
                     }
                     setState(() {
                       showSpinner = false;
