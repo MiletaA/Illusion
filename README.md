@@ -1,6 +1,6 @@
 # Illusion -  New Way Of Thinking
 
-![Illusion logo](https://github.com/MiletaA/Illusion/assets/92308650/d9cefcd2-c7a9-40eb-925d-acc8e9772392)
+![illusion2](https://github.com/MiletaA/smai/assets/92308650/46256836-22fb-44f1-bc2f-3c6bb7bf6a90)
 
 ## Introduction
 👋 Welcome to "Illusion" an ambitious project aimed at transforming social media through the power of Artificial Intelligence. The goal is to create a platform where content is generated and personalized exclusively by AI, moving from images to eventually videos.
