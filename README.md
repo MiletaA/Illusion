@@ -1,12 +1,12 @@
-# SMAI -  New Way Of Thinking
+# Illusion -  New Way Of Thinking
 
-![smai logo](https://github.com/MiletaA/smai/assets/92308650/d9cefcd2-c7a9-40eb-925d-acc8e9772392)
+![Illusion logo](https://github.com/MiletaA/Illusion/assets/92308650/d9cefcd2-c7a9-40eb-925d-acc8e9772392)
 
 ## Introduction
-👋 Welcome to "smai," an ambitious project aimed at transforming social media through the power of Artificial Intelligence. The goal is to create a platform where content is generated and personalized exclusively by AI, moving from images to eventually videos.
+👋 Welcome to "Illusion" an ambitious project aimed at transforming social media through the power of Artificial Intelligence. The goal is to create a platform where content is generated and personalized exclusively by AI, moving from images to eventually videos.
 
 ## 🎯 Objective
-The vision of smai is to provide users with an entirely new experience of social media. By relying on AI-generated content and intelligent algorithms, we aim to offer highly personalized content that evolves according to user preferences.
+The vision of Illusion is to provide users with an entirely new experience of social media. By relying on AI-generated content and intelligent algorithms, we aim to offer highly personalized content that evolves according to user preferences.
 
 ## 🚀 Current Stage & Future Development
 Currently, we are laying down the groundwork. The key areas of focus include:
